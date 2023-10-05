@@ -38,6 +38,7 @@ def addTodoToAListOfTodos(todos: List[str]) -> List[str]:
     todo = userTodo()
     while todo != "":
         todos.append(todo)
+        print(f"Todo: {todo} - added\n")
         with open(todoFile, "a") as file:
             file.writelines(todo + "\n")
         todo = userTodo()
@@ -48,10 +49,10 @@ def validateTodoIndex(idx: str, todos: List[str]) -> None:
     try:
         idx = int(idx)
     except ValueError:
-        print("Invalid index - not an integer")
+        print("\nInvalid index - not an integer")
         return -1
     if idx < 1 or idx > len(todos):
-        print("Invalid index - out of range")
+        print("\nInvalid index - out of range")
         return -1
     else:
         return int(idx) - 1
@@ -62,12 +63,14 @@ def editTodoInAListOfTodos(todos: List[str]) -> List[str]:
         print("Nothing to edit")
         return todos
     printTodos(todos)
-    idx: str = input("Enter the index of the todo to edit: ")
+    idx: str = input("\nEnter the index of the todo to edit: ")
     idx = validateTodoIndex(idx, todos)
     if idx == -1:
         return todos
     todo: str = input("Enter the new todo: ")
+    oldTodo: str = todos[idx]
     todos[idx] = todo
+    print(f"Todo: {oldTodo} - edited to Todo: {todo}")
 
     with open(todoFile, "w") as file:
         for todo in todos:
@@ -80,10 +83,11 @@ def deleteTodoFromAListOfTodos(todos: List[str]) -> List[str]:
         print("Nothing to delete")
         return todos
     printTodos(todos)
-    idx: str = input("Enter the index of the todo to delete: ")
+    idx: str = input("\nEnter the index of the todo to delete: ")
     idx = validateTodoIndex(idx, todos)
     if idx == -1:
         return todos
+    print(f"Todo: {todos[idx]} - deleted")
     todos.remove(todos[idx])
 
     with open(todoFile, "w") as file:
@@ -97,11 +101,12 @@ def finishTodoFromAListOfTodos(todos: List[str], finishedTodoList: List[str]) ->
         print("Nothing to finish")
         return todos, finishedTodoList
     printTodos(todos)
-    idx: str = input("Enter the index of the todo to finish: ")
+    idx: str = input("\nEnter the index of the todo to finish: ")
     idx = validateTodoIndex(idx, todos)
     if idx == -1:
         return todos, finishedTodoList
     finishedTodoList.append(todos[idx])
+    print(f"Todo: {todos[idx]} - finished")
     with open(finishedFile, "w") as file:
         for fintodo in finishedTodoList:
             file.writelines(fintodo + "\n")
@@ -114,7 +119,7 @@ def finishTodoFromAListOfTodos(todos: List[str], finishedTodoList: List[str]) ->
 
 
 def menuItems() -> None:
-    print("Todo Application")
+    print("\nTodo Application\n")
     print("1. Add Todos")
     print("2. Show Todos")
     print("3. Edit a Todo")
@@ -129,7 +134,8 @@ def driverCode() -> None:
 
     while True:
         menuItems()
-        userAction: str = input("Enter your choice: ")
+        userAction: str = input("\nEnter your choice: ")
+        print("")
         userAction = userAction.strip()
 
         if userAction == "0":
@@ -140,6 +146,7 @@ def driverCode() -> None:
         elif userAction == "2":
             printTodos(todoList)
             if len(finishedTodoList) != 0:
+                print("")
                 printFinishedTodos(finishedTodoList)
         elif userAction == "3":
             todoList = editTodoInAListOfTodos(todoList)
