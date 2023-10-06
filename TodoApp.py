@@ -2,8 +2,8 @@ from typing import List
 from utils import AddTodos, DeleteTodos, EditTodos, FinishTodos, Helpers, ShowTodos
 
 
-todoFile = "CurrentTodos.txt"
-finishedFile = "FinishedTodos.txt"
+todoFile = "data/CurrentTodos.txt"
+finishedFile = "data/FinishedTodos.txt"
 
 
 def runTodoApp() -> None:
