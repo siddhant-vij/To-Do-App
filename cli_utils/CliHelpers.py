@@ -1,4 +1,3 @@
-import os
 from typing import List
 
 
@@ -23,10 +22,3 @@ def validateTodoIndex(idx: str, todos: List[str]) -> None:
         return -1
     else:
         return int(idx) - 1
-
-
-def getToDosFromFile(file: str) -> List[str]:
-    if not os.path.exists(file):
-        return []
-    with open(file, "r") as file:
-        return [todo.strip() for todo in file.readlines()]

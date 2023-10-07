@@ -1,14 +1,11 @@
 from typing import List
-from utils import AddTodos, CliHelpers, DeleteTodos, EditTodos, FinishTodos, ShowTodos
+from common_utils import AddTodos, EditTodos, DeleteTodos, FinishTodos, Helpers
+from cli_utils import CliHelpers, ShowTodos
 
 
-todoFile = "data/CurrentTodos.txt"
-finishedFile = "data/FinishedTodos.txt"
-
-
-def runTodoApp() -> None:
-    todoList: List[str] = CliHelpers.getToDosFromFile(todoFile)
-    finishedTodoList: List[str] = CliHelpers.getToDosFromFile(finishedFile)
+def runTodoCli() -> None:
+    todoList, finishedTodoList = Helpers.initializeTodoLists(
+        Helpers.todoFile, Helpers.finishedFile)
 
     while True:
         CliHelpers.menuItems()
@@ -20,20 +17,22 @@ def runTodoApp() -> None:
             print("Exiting the app...")
             break
         elif userAction == "1":
-            todoList = AddTodos.addTodoToAListOfTodosCli(todoList, todoFile)
+            todoList = AddTodos.addTodoToAListOfTodosCli(
+                todoList, Helpers.todoFile)
         elif userAction == "2":
             ShowTodos.printTodosCli(todoList)
             if len(finishedTodoList) != 0:
                 print("")
                 ShowTodos.printFinishedTodosCli(finishedTodoList)
         elif userAction == "3":
-            todoList = EditTodos.editTodoInAListOfTodosCli(todoList, todoFile)
+            todoList = EditTodos.editTodoInAListOfTodosCli(
+                todoList, Helpers.todoFile)
         elif userAction == "4":
             todoList = DeleteTodos.deleteTodoFromAListOfTodosCli(
-                todoList, todoFile)
+                todoList, Helpers.todoFile)
         elif userAction == "5":
             todoList, finishedTodoList = FinishTodos.finishTodoFromAListOfTodosCli(
-                todoList, finishedTodoList, todoFile, finishedFile)
+                todoList, finishedTodoList, Helpers.todoFile, Helpers.finishedFile)
         else:
             print("Invalid choice - Try 1, 2, 3, 4, 5 or 0")
 
@@ -41,4 +40,4 @@ def runTodoApp() -> None:
 
 
 if __name__ == "__main__":
-    runTodoApp()
+    runTodoCli()

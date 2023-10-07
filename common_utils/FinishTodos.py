@@ -1,15 +1,16 @@
 from typing import List, Tuple
-from .ShowTodos import printTodosCli
-from .CliHelpers import validateTodoIndex
+from cli_utils import ShowTodos
+from cli_utils import CliHelpers
+import PySimpleGUI as sg
 
 
 def finishTodoFromAListOfTodosCli(todos: List[str], finishedTodoList: List[str], todoFile: str, finishedFile: str) -> Tuple[List[str], List[str]]:
     if len(todos) == 0:
         print("Nothing to finish")
         return todos, finishedTodoList
-    printTodosCli(todos)
+    ShowTodos.printTodosCli(todos)
     idx: str = input("\nEnter the index of the todo to finish: ")
-    idx = validateTodoIndex(idx, todos)
+    idx = CliHelpers.validateTodoIndex(idx, todos)
     if idx == -1:
         return todos, finishedTodoList
     finishedTodoList.append(todos[idx])
@@ -37,3 +38,14 @@ def finishTodoFromAListOfTodosGui(todos: List[str], finishedTodoList: List[str],
             file.writelines(todo + "\n")
 
     return todos, finishedTodoList
+
+
+def handleFinishGui(todoList: List[str], finishedTodoList: List[str], todoFile: str, finishedFile: str, window: sg.Window, values: dict) -> Tuple[List[str], List[str]]:
+    selected_todo = values["CurrentList"]
+    if selected_todo:
+        idx = todoList.index(selected_todo[0])
+        todoList, finishedTodoList = finishTodoFromAListOfTodosGui(
+            todoList, finishedTodoList, todoFile, finishedFile, idx)
+        window["CurrentList"].update(todoList)
+        sg.popup(f"Todo: {selected_todo[0]} - finished")
+    return todoList, finishedTodoList
