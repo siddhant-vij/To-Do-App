@@ -1,6 +1,6 @@
 from typing import List
-from cli_utils import ShowTodos
-from cli_utils import CliHelpers
+from cli import ShowTodos
+from cli import CliHelpers
 import PySimpleGUI as sg
 
 

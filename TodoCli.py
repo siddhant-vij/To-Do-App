@@ -1,6 +1,6 @@
 from typing import List
-from common_utils import AddTodos, EditTodos, DeleteTodos, FinishTodos, Helpers
-from cli_utils import CliHelpers, ShowTodos
+from common import AddTodos, EditTodos, DeleteTodos, FinishTodos, Helpers
+from cli import CliHelpers, ShowTodos
 
 
 def runTodoCli() -> None:

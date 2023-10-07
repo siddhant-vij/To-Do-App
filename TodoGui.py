@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
-from common_utils import AddTodos, EditTodos, DeleteTodos, FinishTodos, Helpers
-from gui_utils import GuiHelpers
+from common import AddTodos, EditTodos, DeleteTodos, FinishTodos, Helpers
+from gui import GuiHelpers
 
 
 def runTodoGui() -> None:
