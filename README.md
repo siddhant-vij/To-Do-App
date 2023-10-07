@@ -38,6 +38,7 @@ Contributions are what make the open-source community such an amazing place to l
 
 ## Future Improvements
 
+- Web based Streamlit App (TBE)
 - Transition to a Relational Database
 - Database Backup and Recovery
 - UI/UX Improvements
