@@ -1,13 +1,13 @@
 from typing import List
-from .ShowTodos import printTodos
-from .Helpers import validateTodoIndex
+from .ShowTodos import printTodosCli
+from .CliHelpers import validateTodoIndex
 
 
-def editTodoInAListOfTodos(todos: List[str], todoFile: str) -> List[str]:
+def editTodoInAListOfTodosCli(todos: List[str], todoFile: str) -> List[str]:
     if len(todos) == 0:
         print("Nothing to edit")
         return todos
-    printTodos(todos)
+    printTodosCli(todos)
     idx: str = input("\nEnter the index of the todo to edit: ")
     idx = validateTodoIndex(idx, todos)
     if idx == -1:
@@ -20,4 +20,13 @@ def editTodoInAListOfTodos(todos: List[str], todoFile: str) -> List[str]:
     with open(todoFile, "w") as file:
         for todo in todos:
             file.writelines(todo + "\n")
+    return todos
+
+
+def editTodoInAListOfTodosGui(todos: List[str], todoFile: str, idx: int, new_todo: str) -> List[str]:
+    todos[idx] = new_todo
+    with open(todoFile, "w") as file:
+        for todo in todos:
+            file.writelines(todo + "\n")
+
     return todos

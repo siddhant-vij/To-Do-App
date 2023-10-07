@@ -1,7 +1,7 @@
 from typing import List
 
 
-def printTodos(todos: List[str]) -> None:
+def printTodosCli(todos: List[str]) -> None:
     if len(todos) == 0:
         print("Nothing to show")
         return
@@ -10,7 +10,7 @@ def printTodos(todos: List[str]) -> None:
         print(f"{idx + 1}. {todo}")
 
 
-def printFinishedTodos(finishedTodoList: List[str]) -> None:
+def printFinishedTodosCli(finishedTodoList: List[str]) -> None:
     print("Finished Todo List: ")
     for idx, todo in enumerate(finishedTodoList):
         print(f"{idx + 1}. {todo}")

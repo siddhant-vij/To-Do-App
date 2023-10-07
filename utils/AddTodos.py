@@ -1,5 +1,5 @@
 from typing import List
-from .Helpers import getToDosFromFile
+from .CliHelpers import getToDosFromFile
 
 
 def userTodo() -> str:
@@ -7,8 +7,7 @@ def userTodo() -> str:
     return todo.strip()
 
 
-def addTodoToAListOfTodos(todos: List[str], todoFile: str) -> List[str]:
-    todos = getToDosFromFile(todoFile)
+def addTodoToAListOfTodosCli(todos: List[str], todoFile: str) -> List[str]:
     print("Enter Todos below (Press enter to exit)...")
     todo = userTodo()
     while todo != "":
@@ -17,4 +16,11 @@ def addTodoToAListOfTodos(todos: List[str], todoFile: str) -> List[str]:
         with open(todoFile, "a") as file:
             file.writelines(todo + "\n")
         todo = userTodo()
+    return todos
+
+
+def addTodoToAListOfTodosGui(todos: List[str], todoFile: str, todo: str) -> List[str]:
+    todos.append(todo)
+    with open(todoFile, "a") as file:
+        file.writelines(todo + "\n")
     return todos
